@@ -114,14 +114,14 @@ __+ va_end:__ giải phóng biến lưu danh sách
 
 //tham số thứ 2 là danh sách các đối số truyền vào
 int sum(int count,...){
-    va_list list;  //biến lưu danh sách đối số kiểu char*
-    va_start(list,count); //xác định điểm bắt đầu của danh sách cũng chính là đối số đầu tiên 
+    va_list list;         //biến lưu danh sách đối số kiểu char*
+    va_start(list,count); //xác định điểm bắt đầu của danh sách
     int sum = 0;
     while(count > 0){
         sum += va_arg(list,int); //lấy ra từng đối số và tính toán
         count--;
     }
-    va_end(list); //release memory
+    va_end(list); //giải phóng danh sách đối số
     return sum;
 }
 int main(){
