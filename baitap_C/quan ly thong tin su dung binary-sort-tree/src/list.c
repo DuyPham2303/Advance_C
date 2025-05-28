@@ -1,5 +1,5 @@
-//#include "list.h"
-#include "..//inc//list.h"
+#include "list.h"
+//#include "..//inc//list.h"
 extern int total_user;
 static void sort_byName(User_node **list_user_sortName,Info *next_user_value){
     User_node *new_user = (User_node *)malloc(sizeof(User_node));
@@ -17,7 +17,7 @@ static void sort_byName(User_node **list_user_sortName,Info *next_user_value){
 
     //trỏ đến vị trí ban đầu của danh sách 
     User_node *current = *list_user_sortName;
-
+    
     //kiểm tra lần lượt các node trong danh sách có lớn hơn node mới tạo 
     while (current->next_user != NULL && stringCompare(current->next_user->info.name, new_user->info.name) < 0)
     {

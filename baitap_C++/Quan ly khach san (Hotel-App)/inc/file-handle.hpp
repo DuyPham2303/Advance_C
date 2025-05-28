@@ -9,10 +9,10 @@
 #include "room-manager.hpp"
 #include "service-manager.hpp"
 
-#define GUESS_CSV_PATH ".//database//guess.csv"
-#define ROOM_CSV_PATH ".//database//room.csv"
-#define SERVICE_CSV_PATH ".//database//service.csv"
-#define EMPLOYEE_CSV_PATH ".//database//employee.csv"
+#define GUESS_CSV_PATH "..//database//guess.csv"
+#define ROOM_CSV_PATH "..//database//room.csv"
+#define SERVICE_CSV_PATH "..//database//service.csv"
+#define EMPLOYEE_CSV_PATH "..//database//employee.csv"
 
 
 #define FILE_EMPTY 2

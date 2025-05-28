@@ -12,8 +12,8 @@ typedef struct
     char* phone;
     uint8_t age;
 }Info;
-typedef struct New_user{
-    struct New_user* next_user; //next address of node
+typedef struct User_node{
+    struct User_node* next_user; //next address of node
     Info info;                  //data of node
 }User_node;
 typedef struct CenterPoint{

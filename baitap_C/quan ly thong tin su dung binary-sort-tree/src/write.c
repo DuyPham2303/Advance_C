@@ -1,5 +1,5 @@
-//#include"write.h"
-#include "..//inc//write.h"
+#include"write.h"
+//#include "..//inc//write.h"
 bool writeCSV(char* path){
     FILE* file = fopen(path,"w");
     if(file == NULL){

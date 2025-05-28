@@ -1,5 +1,5 @@
-#include "../inc/manager.hpp"
-#include "../inc/employee.hpp"
+#include "manager.hpp"
+#include "employee.hpp"
 
 											/*CÁC HÀM ĐỂ TEST*/
 /*

@@ -1,5 +1,5 @@
-//#include"read.h"
-#include "..//inc//read.h"
+#include"read.h"
+//#include "..//inc//read.h"
 uint8_t total_user = 0; //biến đếm số lượng user
 static Info *parse_line(char *line)
 {

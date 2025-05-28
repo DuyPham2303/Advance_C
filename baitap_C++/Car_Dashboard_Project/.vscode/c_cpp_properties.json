@@ -8,7 +8,7 @@
                 "${workspaceFolder}/Data",
                 "${workspaceFolder}/Server",
                 "${workspaceFolder}/UI"
-            ],
+            ],--
             "defines": [
                 "_DEBUG",
                 "UNICODE",

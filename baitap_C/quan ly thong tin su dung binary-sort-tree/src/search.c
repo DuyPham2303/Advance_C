@@ -1,5 +1,5 @@
-//#include "search.h"
-#include "..//inc//search.h"
+#include "search.h"
+//#include "..//inc//search.h"
 CenterPoint *buildTree(User_node *head, int start, int end)
 {
     // kiểm tra vị trí các node trái và phải có hợp lệ hay không -> cho biết điểm dừng xây dụng cây nhị phânphân

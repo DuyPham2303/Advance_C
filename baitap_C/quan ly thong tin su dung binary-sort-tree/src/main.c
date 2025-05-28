@@ -1,7 +1,12 @@
-#include"..//inc//list.h"    
+/* #include"..//inc//list.h"    
 #include"..//inc//write.h"
 #include"..//inc//read.h"
-#include"..//inc//search.h"
+#include"..//inc//search.h" */
+#include "list.h"
+#include "write.h"
+#include "read.h"
+#include "search.h"
+
 #define PATH_FILE ".//database//data.csv"
 const char *str[] = {"File has been written\n", "Failed to open file\n"};
 
@@ -11,7 +16,8 @@ int main()
     /* if (writeCSV(PATH_FILE) == SUCCESS_CREATED_FILE)
         log_status(str[0]);
     else
-        log_status(str[1]); */
+        log_status(str[1]);
+    return 0; */
     
     //dọc file csv và trả về con trỏ heap tới vùng nhớ lưu trữ thông tin
     Info *info = readCSV(PATH_FILE);
@@ -35,7 +41,7 @@ int main()
 
 
     //nếu tìm kiếm theo thông tin nào thì thông tin còn lại được đặt là NULL để chương trình phân biệt để xử lý 
-    char *phone = "0376572677"; 
+    char *phone ="0978278121"; 
     char *name = NULL;
 
    
