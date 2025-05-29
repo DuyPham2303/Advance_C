@@ -57,7 +57,7 @@ void* Task_EngineControl(void* arg) {
         if(errorStatus == 1){
             //kích hoạt xự kiện cho task Diagnostic
             setEvent(evErrorDetected);
-            notify_event(TASK_ID_Diagnostic);  //thông báo kết quả quả cho task_Diagnostic   
+            notify_event(TASK_ID_Diagnostic);  //thông báo kết quả cho task_Diagnostic   
         }
     
         //kích hoạt sự kiện cho task actuator
@@ -87,7 +87,7 @@ void* Task_Actuator(void* arg) {
             break;
         }
 
-        //thực thi công việc của task
+
         printf("\n[TASK_Actuator]: Processing...\n");
         Runnable_ExecuteActuator();
 
@@ -123,29 +123,9 @@ void* Task_Diagnostic(void* arg) {
     return NULL;
 }
 void* ISR_CAN_RX(void* arg) {
-    //khởi tạo CAN protocol -> cập nhật trạng thái cho state machine
-    Runnable_InitCan();
-    while(1){
-        Os_Delay(3000);
-        GetResource();
-        //khai báo cờ ngắt để kiểm tra 
-        uint8_t emergency_error = rand() % 5;
-        if(check_stop_condition(ID_ISR_CAN_RX)){
-            break;
-        }
-        //gọi hàm Runnable để kiểm tra tín hiệu ngắt
-
-        //kiểm tra dữ liệu có hợp lệ
-        if (emergency_error == 3) {
-            printf("CAN Interrupt Triggered...\n");
-            //SetEvent(evErrorDetected | evControlCmdReady);
-            //notify_event(TASK_ID_Actuator);
-            //notify_event(TASK_ID_Diagnostic); 
-        }
-        LeaveResource();
-    }
-    printf("[ISR_CAR_RX]: đã bị hủy\n");
-    return NULL;
+   /* 
+       Triển khai phần xử lý tín hiệu ngắt từ CAN
+   */
 }
 void* Task_Keyboard(void* arg){
     static char choice;
@@ -157,7 +137,7 @@ void* Task_Keyboard(void* arg){
         if (choice == 'r')
         {
             printf("đang khởi động hệ thống\n");
-            //cập nhật trạng thái khởi động hệ thống
+            //cập nhật trạng thái khởi động hệ thống 
             IgnitionSet(ON,STATE_INIT);
 
             //kiểm tra khởi tạo hệ thống và kích hoạt các luồng
@@ -167,11 +147,12 @@ void* Task_Keyboard(void* arg){
                 notify_event(TASK_ID_Sensor);   //thông báo cho phép kích hoạt task sensor
             }
             else{
-                goto handle_shutdown;  //nhảy đến phần xử lý dừng hệ thống
+                goto handle_shutdown;  //Dừng tất cả các luồng ngay lập tức Nếu hệ thống khởi tạo thất bại
             }
         }
         else if(choice == 's')
         {
+           //cập nhật trạng thái dừng khẩn cấp
            IgnitionSet(ON,STATE_EMERGENCY_STOP);
            clearEvent(evSystemRunning);
         }
@@ -190,7 +171,7 @@ void* Task_Keyboard(void* arg){
             LeaveResource(); 
             break;
         }
-        ECU_StateMachine();
+        ECU_StateMachine(); //Thực hiện cập nhật trạng thái hệ thống
         LeaveResource();
 
         //delay để giảm tải hệ thống
