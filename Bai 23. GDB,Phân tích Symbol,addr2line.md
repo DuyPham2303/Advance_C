@@ -1,23 +1,32 @@
+
 # 1.GDB
 
 ## 1.1 Giới thiệu GDB: định nghĩa & mục đích
 GDB (GNU Debugger) là một trình gỡ lỗi dòng lệnh, cho phép điều khiển luồng thực thi chương trình trong runtime, cho phép:
-    + Dừng chương trình tại bất kỳ dòng nào
-    + Quan sát giá trị biến, thanh ghi, call stack
-    + Tìm lỗi crash, lỗi logic, lỗi pointer
-    + Kiểm tra từng bước chạy (step-by-step)
++ Dừng chương trình tại bất kỳ dòng nào
++ Quan sát giá trị biến, thanh ghi, call stack
++ Tìm lỗi crash, lỗi logic, lỗi pointer
++ Kiểm tra từng bước chạy (step-by-step)
 
 ## 1.2 Trình tự thao tác trong GDB
 
-gdb ./bug_demo.exe	  Mở chương trình trong GDB
-start	              Bắt đầu chạy chương trình dừng tại main()
-break <func> hoặc break <line>	Đặt điểm dừng
-next	              Thực thi từng dòng (không vào hàm con)
-step	              Bước vào trong hàm con
-print var	          In giá trị biến
-backtrace	          Hiện stack gọi khi crash
-run	                  Chạy lại từ đầu
-quit`	              Thoát GDB    
+`gdb ./bug_demo.exe`	    Mở chương trình trong GDB
+
+`start`	                    Bắt đầu chạy chương trình dừng tại main()
+
+`break <func> hoặc break <line>`	Đặt điểm dừng
+
+`next	`              Thực thi từng dòng (không vào hàm con)
+
+`step`	              Bước vào trong hàm con
+
+`print var`	          In giá trị biến
+
+`backtrace`	          Hiện stack gọi khi crash
+
+`run	`                  Chạy lại từ đầu
+
+`quit`	              Thoát GDB    
 
 ## 1.3 Các lỗi phổ biến
 
@@ -25,34 +34,34 @@ quit`	              Thoát GDB
 Các lỗi trong lập trình thường được chia thành nhiều loại và được xử lý dựa trên các bước của quá trình biên dịch 
 
 __Preprocessing__
-    + Lỗi thiếu `#include` báo lỗi thiếu định nghĩa hàm/kiểu, macro
-    + lỗi khai báo nhiều lần khi thiếu `#ifndef / #pragma once`
-    + Lỗi side-effect macro 
++ Lỗi thiếu `#include` báo lỗi thiếu định nghĩa hàm/kiểu, macro
++ lỗi khai báo nhiều lần khi thiếu `#ifndef / #pragma once`
++ Lỗi side-effect macro 
 
 __Compilation__
-    + `Syntax error` : sai/thiếu cú pháp như thiếu ';' hoặc đóng/mở ngoặc '{}' không hợp lý
-    + `Semantic error` : gán sai kiểu dữ liệu 
-    + `Format Specific error` : sai định dạng 
++ `Syntax error` : sai/thiếu cú pháp như thiếu ';' hoặc đóng/mở ngoặc '{}' không hợp lý
++ `Semantic error` : gán sai kiểu dữ liệu 
++ `Format Specific error` : sai định dạng 
    
 __Linking__
-    + `redinition` : lặp định nghĩa, do include `.c` trực tiếp, thay vì `.h`
-    + Khai báo biến extern chia sẻ nhiều file không hợp lệ
++ `redinition` : lặp định nghĩa, do include `.c` trực tiếp, thay vì `.h`
++ Khai báo biến extern chia sẻ nhiều file không hợp lệ
 
 __Runtime__
-    + `Segmentaion fault` : còn gọi là `core dump` do truy cập vùng nhớ không hợp lệ thường liên quan tới thao tác con trỏ
-        => Truy cẫp Null pointer
-        => dangling pointer (dùng con trỏ khi đã free)
-        => truy cập giá trị ngoài phạm vi mảng
-        => memory leak (rò rỉ heap do không free sau sử dụng)
-    + `Logic error` : gán toán tử không hợp lệ
-    + `Lỗi chi 0`
-    + `threading error`: race condition, deadlock, thiếu cơ chế đồng bộ tài nguyên chung
++ `Segmentaion fault` : còn gọi là `core dump` do truy cập vùng nhớ không hợp lệ thường liên quan tới thao tác con trỏ
+    => Truy cẫp Null pointer
+    => dangling pointer (dùng con trỏ khi đã free)
+    => truy cập giá trị ngoài phạm vi mảng
+    => memory leak (rò rỉ heap do không free sau sử dụng)
++ `Logic error` : gán toán tử không hợp lệ
++ `Lỗi chi 0`
++ `threading error`: race condition, deadlock, thiếu cơ chế đồng bộ tài nguyên chung
 
 **Ví dụ code tổng hợp lỗi**
 
 ### 1.3.2 Compiler flags để phát hiện lỗi
 
-+ **Mục đích** : Ta có thể sử dụng các cờ warning để giúp phát hiện lỗi càng sớm càng tốt tại compile-time. Giúp hạn chế undefined behaviour. 
+**Mục đích** : Ta có thể sử dụng các cờ warning để giúp phát hiện lỗi càng sớm càng tốt tại compile-time. Giúp hạn chế undefined behaviour. 
 
 + `"-Wall"`               : bật tất cả cảnh báo quan trọng
 + `"-Wextra"`             : Cảnh báo bổ sung như (bỏ sót biến , so sánh sai,...)
@@ -264,7 +273,8 @@ __Cấu hình launch.json__
 
 __Ví dụ: Chạy chương trình với tham số dòng lệnh__
 
-+ **Thế nào là tham số dòng lệnh**
+**Thế nào là tham số dòng lệnh**
+
 Tham số cho phép chương trình nhận đầu vào ngay lúc chạy, mà không cần phải dùng scanf. Giúp ta kiểm tra và chạy chương trình linh hoạt, dễ test,và chuyên nghiệp hơn
     + `Khai báo`
     ```c
@@ -512,6 +522,16 @@ công cụ của Microsoft Visual Studio (có trong Developer Command Prompt ho�
     + Bạn không có debugger attach trực tiếp (như GDB/WinDbg).
     + Bạn muốn bắt lỗi ở runtime để trace ngược thủ công (ví dụ: dùng addr2line để map địa chỉ về source code).
 
+**Trường hợp thực tế không dùng GDB**
+
+| Tình huống thực tế                                               | Lý do không dùng GDB       |
+| ---------------------------------------------------------------- | -------------------------- |
+| Hệ thống embedded không có cổng debug (SWD/JTAG)                 | Không có debugger          |
+| Chạy trên thiết bị IoT xa                                        | Không attach debugger được |
+| Lỗi xảy ra ngẫu nhiên trong runtime, không dễ tái hiện khi debug | Cần log lỗi                |
+| Dùng FreeRTOS hoặc Bare Metal không hỗ trợ remote GDB            | GDB không kết nối được     |
+
+
 **Cơ chế bắt lỗi và in chính xác địa chỉ lỗi**
 
 __Dùng SetUnhandledExceptionFilter– Windows-only__
@@ -563,6 +583,13 @@ addr2line -e your_program.exe 0x00401234
 Qua 2 nội dung trên ta đã biết được cách sử dụng `gdb` để gỡ lỗi chương trình qua việc quan sát hành vi của câu lệnh và thông tin trạng thái tại thời điểm đó kết hợp với `addr2line` để trích xuất vị trí của lệnh gây lỗi từ địa chỉ gây lỗi. Nhưng nếu ta muốn biết rõ hơn về 
    + địa chỉ đó đén từ đâu ?
    + biến/hàm được lưu ở nơi nào ?
+**file thực thi (PE) giúp chương trình hiểu được**
+    + nó cần nạp cái gì
+    + nạp code/data vào đúng vị trí trên RAM
+    + Thiết lập entry point (điểm bắt đầu chương trình)
+    + Hỗ trợ linking tới DLL, import/export symbol
+**Mục đích của DLL**
+    + "Thư viện động (DLL/.so) giúp liên kết các hàm được định nghĩa bên ngoài chương trình, thường là thuộc về thư viện hệ thống, trong quá trình chạy (runtime) chứ không cần phải nhúng toàn bộ mã đó ngay từ khi biên dịch (compile time).
 
 ## 3.1 Symbol Table
 ### 3.1.1 Symbol là gì
@@ -660,30 +687,84 @@ gcc -g memmap_demo.c -o memmap_demo.exe
 
 + Lý do compile với `-g` là để tạo ra thông tin cần thiết cho __gdb__ hiểu để cho phép ta kiểm soát và xem được trạng thái chương trình thông qua dữ liệu từ symbol table(bảng ánh xạ địa chỉ tương ứng với hàm/biến, dòng code)
 
-__b. Phân tích Symbol Table với nm__
+__b. Phân tích Symbol Table__
 
 ```c
 nm -n memmap_demo.exe
 ```
 
 
-+ 3. __Phân tích memory segment với objdump__
+__c. __Phân tích Section header Table__
 
 ```c
 objdump -h memmap_demo.exe
 ```
 
-+ 4. __Kiểm tra thực tế với gdb__
+| Trường        | Ý nghĩa                              |
+| ------------- | ------------------------------------ |
+| **Idx**       | Số thứ tự section                    |
+| **Name**      | Tên section (`.text`, `.data`, ...)  |
+| **Size**      | Kích thước vùng                      |
+| **VMA / LMA** | Địa chỉ ảo và vật lý khi nạp vào RAM |
+| **File off**  | Offset trong file `.exe`             |
+| **Algn**      | Alignment (căn lề) trong bộ nhớ      |
+
+**Dữ liệu chương trình**
++ `.text` : mã máy đã được biên dịch, nạp vào RAM, để thực thi
++ `.data` : biến global đã khởi tạo
++ `.bss`  : biến global chưa khởi tạo
++ `.rdata`: hằng số
++ `.tls`  : dùng cho các biến thread
+**Dữ liệu hệ thống**
++ `.idata` : lưu import table để liên kết DLL dùng cho sử dụng các thư viện bên ngoài
++ `.reloc` : dùng cho ASLR, cơ chế random hóa địa chỉ
++ `.rsrc`  : chứa dữ liệu tài nguyên liên quan đến UI (hiển thị hệ thống -> biểu tượng,menu,version info)
++ `.pdata` : chứa các function dùng cho exception handling (xác định vùng code tương ứng với exception) được gdb dùng để gỡ lỗi 
++ `.xdata` : Metadata của tửng function (giúp quay ngược stack khi exception xảy ra)
+**Dữ liệu debug**
++ `.debug_info` : cấu trúc chương trình,biến,kiểu dữ liệu
++ `.debug_line` : mapping địa chỉ code với dòng trong file
++ `.debug_str`  : chuỗi ký tự trong debug
++ `.debug_bbrev`,`debug_arranges`,`debug_frame` : phân tích khổi chương trình, vùng stack
+
+**Mối liên hệ giữa VMA,LMA, và file off **
++ `VMA` : Nơi CPU truy cập khi thực thi (địa chỉ ảo hiển thị gdb)
++ `LMA` : Nơi loader đặt section trong RAM (địa chỉ vật lý lưu trên phần cứng thông qua MMU)
++ `file off` : nơi Os sẽ bắt đầu load dữ liệu lên RAM 
+
+__TÓM LẠI__
+| Thuật ngữ | Viết tắt               | Vai trò                                                                  | Có thể thấy từ user-space?                   |
+| --------- | ---------------------- | ------------------------------------------------------------------------ | -------------------------------------------- |
+| **LMA**   | Load Memory Address    | Địa chỉ **RAM thật (vật lý)** nơi dữ liệu được nạp vào (hoặc ánh xạ tới) | ❌ **Không thể thấy** trực tiếp từ user-space |
+| **VMA**   | Virtual Memory Address | Địa chỉ **ảo** mà chương trình (và GDB) dùng để truy cập                 | ✅ **Có thể thấy** trong GDB, objdump, etc.   |
+
 
 + **Khởi động gdb**
 ```c
 gdb memmap_demo.exe
 ```
+
+
 + **debug từ dòng đầu**
 
 ```c
 (gdb) start
 ```
+
+__Phân tích VMA trên RAM__
+
+```c
+info files 
+```
+
+Dòng đầu tiên
+
+```c
+Entry point : 0x140001410
+```
+Đây là địa chỉ của hàm khởi tạo hệ thống thường là `_start_` hoặc `mainCRTStartup` chứ không phải main trực tiếp
+
+
 + **In địa chỉ các biến**
 
 ```c
